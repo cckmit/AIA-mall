@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tulingxueyuan.mallfront.modules.pms.mapper.PmsProductMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.tulingxueyuan.mallfront.modules.pms.model.PmsProduct">
+        <id column="id" property="id" />
+        <result column="brand_id" property="brandId" />
+        <result column="product_category_id" property="productCategoryId" />
+        <result column="product_attribute_category_id" property="productAttributeCategoryId" />
+        <result column="name" property="name" />
+        <result column="pic" property="pic" />
+        <result column="product_sn" property="productSn" />
+        <result column="delete_status" property="deleteStatus" />
+        <result column="publish_status" property="publishStatus" />
+        <result column="new_status" property="newStatus" />
+        <result column="recommand_status" property="recommandStatus" />
+        <result column="sort" property="sort" />
+        <result column="price" property="price" />
+        <result column="stock" property="stock" />
+        <result column="low_stock" property="lowStock" />
+        <result column="note" property="note" />
+        <result column="album_pics" property="albumPics" />
+        <result column="brand_name" property="brandName" />
+        <result column="product_category_name" property="productCategoryName" />
+    </resultMap>
+
+    <resultMap id="ProductDetailDTOMap" extends="BaseResultMap" type="com.tulingxueyuan.mallfront.dto.ProductDetailDTO">
+        <collection property="skuStockList" columnPrefix="sku_" resultMap="com.tulingxueyuan.mallfront.modules.pms.mapper.PmsSkuStockMapper.BaseResultMap"></collection>
+        <collection property="productAttributeValueList" columnPrefix="att_" resultMap="com.tulingxueyuan.mallfront.modules.pms.mapper.PmsProductAttributeValueMapper.BaseResultMap"></collection>
+     </resultMap>
+
+
+</mapper>

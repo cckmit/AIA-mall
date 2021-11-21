@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tulingxueyuan.mall.modules.pms.mapper.PmsSkuStockMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.tulingxueyuan.mall.modules.pms.model.PmsSkuStock">
+        <id column="id" property="id" />
+        <result column="product_id" property="productId" />
+        <result column="sku_code" property="skuCode" />
+        <result column="price" property="price" />
+        <result column="stock" property="stock" />
+        <result column="low_stock" property="lowStock" />
+        <result column="spu1" property="spu1" />
+        <result column="spu2" property="spu2" />
+        <result column="spu3" property="spu3" />
+        <result column="pic" property="pic" />
+        <result column="sale" property="sale" />
+        <result column="lock_stock" property="lockStock" />
+    </resultMap>
+
+</mapper>

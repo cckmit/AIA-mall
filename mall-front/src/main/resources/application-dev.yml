@@ -1,0 +1,41 @@
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/mall?useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai
+    username: root
+    password: root
+  redis:
+    host: localhost # Redis服务器地址
+    database: 0 # Redis数据库索引（默认为0）
+    port: 6379 # Redis服务器连接端口
+    password: root # Redis服务器连接密码（默认为空）
+    timeout: 500ms # 连接超时时间（毫秒）
+
+logging:
+  level:
+    root: info
+    com.tulingxueyuan: debug
+
+trade:
+  alipay:
+    qrcode:
+      httpBasePath: /static/qrcode
+      alipaySuccessFallBack: http://i37ew7.natappfree.cc/order/alipay/fallback
+      wechatPaySuccessFallBack: http://jec4p7.natappfree.cc/order/wecahtPay/fallback
+      storePath: D:/QRCode
+
+    configs:
+      pid: 2088621957076663           # 商户partner id
+      appid: 2021000118644381        # 商户应用id
+      privateKey: MIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQCCZlQZxALeQyEXdYqUcKmFDll6eCMO9D6fG1DgMPcdGOf6GZqOF29ZgIQ2ZGbKf2yNXL2rXfjxKz2yWyyDsgYsOx4XX6JQVjcOrnjVyA5+X3NYv7MaRDLiXa6peZKTbe6kPPHViZ34z41aCUuDbEW/NqT7SocDpBh74nZaEP7vPEUd5mvO+5IXJ2LyDUjTnGOxQKHdVVy4Pm1RZNq+4Xo1Ot+H0H8wWcqOjR7gwHwhlONkFZm1ocQUq/zHr9U19G+fxAGh1OPYhRu0OrjgRQ6kmxDUigReSaLB2SdyBkZHBpWrvcCl343W9XtNsruHN2rMcb0oBDAEAPGuIHE/jfI7AgMBAAECggEBAIH8YV9hzf4jaqxI5kB8Ye+Z00ZK1Z/Fh1rxTth81whxWGUt+qwj3kKY4rKZuQGordvok8Vsoog9s33EdwY8gvy6XY+tLE7q8m03LIrmptQAcCoKxg2r6BFQk5iq8Jr4HcgoXGWhjhCFTQFwfI7gclJetW0t6JKPlDyCDbpQcOCmhfu1c1PyNNkxl68b4hil/XLMVmyYMvdmbRmhFMarLsxvaMCVLNQ23pvPRDbwp2u2bXeHmpqQwWTvVxJ3Ya8WBks4JJlPfQOJuA64HSoAOLQFlkfVoTY0RB0iL3bvC1PY8scqN22wvjO+6dEtooPfbRhGEFJO+X3eQ8wUh8RvskECgYEAwGaJeihTO3lbFfyZy/JuWNW+GZJsyB0XAzHd47fxUXgg8wGF1NnNJ6QvKluih/kCjLYcu278jEEWpP034pQ4nrVmqcRgSbnbf6OI4794Yv1iitPGYQcQBMXIRsJ+mwR45uqYg7wRqOsWA0hwCvFUS0Wort+Mhm7l+QU/n88haFsCgYEArYEcpJ75l4XhhT1B+6UmapgiRDrxC+QB7lBcRRlRD6AtVAb9zcbQtyQKtzBRhH3pfvmY8pTlIYvgoKiVGAyFdJR1cYjCB2cAXp+TMXhaFEqWVI1baQQ7B888VDjVLqzsarsHTBwvdeuhKBKF9km9nDnqve0egLAyHrZNWFiKw6ECgYEAhGfMIloP9XTtfzMH8DeVQuNNYLHI1OpYBOXTarwSgVtnaXRZ0oJU0fwGTWMkdeiinY1SNpcJi8fbOo3cYLxaPrZdwWUYUoRqDuvO79S7l3wCzcEx22IN3wrxaei9UhcA0QEPFlFd4d5ulrHKEW3E8cwtarMDNRyqfPXktCjKN9MCgYBcRU6bSaRI7b06o5JEptagV5nZmVL51N8mAvyfDtCqM7AHgNRXLAVxcCx2sa6YfHHBwjGRyJd2WLI0HpNzv6z1i8JNh8JQN3nd2JVp+KxHIEeEXcygM8zE4XQfAj51XSc5t48w7chbuNzyt68ghKTewXpSWRkgrRNqe970PdpGIQKBgDinp9aNAU/olZGjVuxQNcI0CsdBUB2TeA1OYI1Hoc05RQZhNKaU24Rk/HhQWdPmQtVri4cRDtlo5XwpFWDpSzYZEzSjqw2C7HgkjXtvwbz6Xu4mrVazeaUC8WdvJy4pYDJFM+TwwyYX6Roos2OkSoVFi7nnszFO7dBgB8qA4DMo     # RSA私钥，用于对商户请求报文加签
+      publicKey: MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAgmZUGcQC3kMhF3WKlHCphQ5ZengjDvQ+nxtQ4DD3HRjn+hmajhdvWYCENmRmyn9sjVy9q1348Ss9slssg7IGLDseF1+iUFY3Dq541cgOfl9zWL+zGkQy4l2uqXmSk23upDzx1Ymd+M+NWglLg2xFvzak+0qHA6QYe+J2WhD+7zxFHeZrzvuSFydi8g1I05xjsUCh3VVcuD5tUWTavuF6NTrfh9B/MFnKjo0e4MB8IZTjZBWZtaHEFKv8x6/VNfRvn8QBodTj2IUbtDq44EUOpJsQ1IoEXkmiwdkncgZGRwaVq73Apd+N1vV7TbK7hzdqzHG9KAQwBADxriBxP43yOwIDAQAB      # RSA公钥，仅用于验证开发者网关
+      alipayPublicKey: MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAhOSTSgwbBBPig93LHGoRV8Z6w0MlqJU8kzQv8yqnRUElf1b/+QvCV91TO2NqCSPQEvOKfw3a+idMCIm7Ff5v8wzytTBEmBemhVuhlq1YB/I9uDrXytrH8L3JWjj+letAlmWSrHRbnzvbiv0s4FZPLA3x89JbnvYz3sosS8Dk9ltoChXTL0z2aUdzo1nQM0/L6PMiMgj6kSjkPF1E9cihqS1Eb3hqBjDOMD19q7/hmtHEzQ07ePNkJpkLY4uFfWZVZ8o0VZMiUjhVnCQ8zTMDKQAwRd6MSXUBEThxZaCC69nTGUQaH5xgI4/x+be7dl1jWvggdCdTizUcyCaVwBwVNQIDAQAB # 支付宝RSA公钥，用于验签支付宝应答
+      signType: "RSA2"        #签名类型
+
+Oos:
+  accessKeyId: LTAI5tQ1kzYLi1uKG2VFtQ4a
+  accessKeySecret: nrVEi6DK3S744q0qrXHhpBGufccUVp
+  bucketName: chill-coder
+  endpoint: oss-cn-shenzhen.aliyuncs.com
+  dir: AIA-mall
+
+

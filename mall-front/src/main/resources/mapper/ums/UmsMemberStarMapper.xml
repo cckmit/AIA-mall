@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tulingxueyuan.mallfront.modules.ums.mapper.UmsMemberStarMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.tulingxueyuan.mallfront.modules.ums.model.UmsMemberStar">
+        <id column="id" property="id" />
+        <result column="member_id" property="memberId" />
+        <result column="star_store_id" property="starStoreId" />
+        <result column="star_product_id" property="starProductId" />
+    </resultMap>
+
+    <update id="updateStarStore">
+        UPDATE
+        ums_member_star ums
+        SET ums.star_store_id = CONCAT(ums.star_store_id,',${storeId}')
+        where ums.member_id=#{memberId}
+    </update>
+
+</mapper>

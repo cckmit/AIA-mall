@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tulingxueyuan.mallfront.modules.oms.mapper.OmsOrderCommentMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.tulingxueyuan.mallfront.modules.oms.model.OmsOrderComment">
+        <id column="id" property="id"/>
+        <result column="order_id" property="orderId"></result>
+        <result column="member_id" property="memberId"/>
+        <result column="to_comment_id" property="toCommentId"/>
+        <result column="text_comment" property="textComment"/>
+        <result column="comment_time" property="commentTime"/>
+        <result column="status" property="status"/>
+    </resultMap>
+
+    <resultMap id="orderCommentMap" type="com.tulingxueyuan.mallfront.dto.OrderCommentDTO">
+        <result property="orderId" column="order_id"/>
+        <result property="textComment" column="text_comment"/>
+        <result property="picComment" column="pic_comment"/>
+        <result property="commentTime" column="comment_time"/>
+        <result property="toCommentId" column="to_comment_id"/>
+        <result property="memberId" column="member_id"/>
+        <result property="status" column="status"/>
+    </resultMap>
+
+    <select id="getCommentByOrderId" resultMap="orderCommentMap">
+        select *
+        from oms_order_comment ooc
+        where ooc.order_id=#{orderId} and ooc.status=0
+    </select>
+
+    <select id="getCommentByParentId" resultMap="orderCommentMap">
+        SELECT
+        *
+        from oms_order_comment ooc
+        WHERE ooc.to_comment_id = #{parentId} AND ooc.status!=0
+    </select>
+
+</mapper>

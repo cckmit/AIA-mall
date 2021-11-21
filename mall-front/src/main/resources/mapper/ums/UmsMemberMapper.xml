@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tulingxueyuan.mallfront.modules.ums.mapper.UmsMemberMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.tulingxueyuan.mallfront.modules.ums.model.UmsMember">
+        <id column="id" property="id" />
+        <result column="username" property="username" />
+        <result column="password" property="password" />
+        <result column="phone" property="phone" />
+        <result column="status" property="status" />
+        <result column="create_time" property="createTime" />
+        <result column="icon" property="icon" />
+        <result column="gender" property="gender" />
+        <result column="birthday" property="birthday" />
+        <result column="city" property="city" />
+        <result column="job" property="job" />
+        <result column="personalized_signature" property="personalizedSignature" />
+    </resultMap>
+
+</mapper>

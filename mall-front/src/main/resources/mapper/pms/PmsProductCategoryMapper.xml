@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tulingxueyuan.mallfront.modules.pms.mapper.PmsProductCategoryMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.tulingxueyuan.mallfront.modules.pms.model.PmsProductCategory">
+        <id column="id" property="id"/>
+        <result column="parent_id" property="parentId"/>
+        <result column="name" property="name"/>
+        <result column="level" property="level"/>
+        <result column="product_count" property="productCount"/>
+        <result column="product_unit" property="productUnit"/>
+        <result column="nav_status" property="navStatus"/>
+        <result column="show_status" property="showStatus"/>
+        <result column="sort" property="sort"/>
+        <result column="icon" property="icon"/>
+        <result column="keywords" property="keywords"/>
+        <result column="description" property="description"/>
+    </resultMap>
+
+    <resultMap id="HomeMenusBannerMap" type="com.tulingxueyuan.mallfront.dto.HomeMenusDTO">
+        <id property="id" column="id"></id>
+        <result property="name" column="name"></result>
+        <collection property="productList" ofType="com.tulingxueyuan.mallfront.dto.ProductDTO">
+            <id property="id" column="pro_id"></id>
+            <result property="name" column="pro_name"></result>
+            <result property="pic" column="pro_pic"></result>
+            <result property="price" column="pro_price"></result>
+            <result property="originalPrice" column="pro_originalPrice"></result>
+        </collection>
+    </resultMap>
+
+    <select id="getMenus" resultMap="HomeMenusBannerMap">
+        SELECT
+            pc1.id id,
+            pc1.name name,
+            p.id pro_id,
+            p.name pro_name,
+            p.pic pro_pic,
+            p.price pro_price,
+            FROM pms_product_category pc1
+            LEFT JOIN pms_product p
+            ON product_category_id IN (SELECT pc2.id FROM pms_product_category pc2 WHERE pc1.id =pc2.parent_id AND pc1.parent_id=0)
+            WHERE pc1.parent_id=0 and pc1.nav_status=1
+            order by pc1.id asc,p.sort desc;
+    </select>
+
+</mapper>

@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tulingxueyuan.mallfront.modules.oms.mapper.OmsOrderMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.tulingxueyuan.mallfront.modules.oms.model.OmsOrder">
+        <id column="id" property="id"/>
+        <result column="member_id" property="memberId"/>
+        <result column="order_sn" property="orderSn"/>
+        <result column="create_time" property="createTime"/>
+        <result column="member_username" property="memberUsername"/>
+        <result column="pay_amount" property="payAmount"/>
+        <result column="pay_type" property="payType"/>
+        <result column="status" property="status"/>
+        <result column="order_type" property="orderType"/>
+        <result column="receiver_name" property="receiverName"/>
+        <result column="receiver_phone" property="receiverPhone"/>
+        <result column="receiver_post_code" property="receiverPostCode"/>
+        <result column="receiver_province" property="receiverProvince"/>
+        <result column="receiver_city" property="receiverCity"/>
+        <result column="receiver_region" property="receiverRegion"/>
+        <result column="receiver_detail_address" property="receiverDetailAddress"/>
+        <result column="note" property="note"/>
+        <result column="delete_status" property="deleteStatus"/>
+        <result column="payment_time" property="paymentTime"/>
+        <result column="receive_time" property="receiveTime"/>
+        <result column="consignor_name" property="consignorName"/>
+        <result column="product_id" property="productId"/>
+        <result column="sku_id" property="skuId"/>
+        <result column="consignor_phone" property="consignorPhone"/>
+        <result column="product_quantity" property="productQuantity"/>
+        <result column="order_rate" property="orderRate"/>
+    </resultMap>
+
+
+    <resultMap id="OrderDetailMap" type="com.tulingxueyuan.mallfront.dto.OrderDetailDTO">
+        <id property="orderId" column="id"></id>
+        <result property="receiverCity" column="receiver_city"></result>
+        <result property="receiverDetailAddress" column="receiver_detail_address"></result>
+        <result property="receiverProvince" column="receiver_province"></result>
+        <result property="receiverRegion" column="receiver_region"></result>
+        <result property="payAmount" column="pay_amount"></result>
+        <result property="orderSn" column="order_sn"></result>
+        <result property="receiverName" column="receiver_name"></result>
+        <result property="consignorName" column="consignor_name"></result>
+        <result property="receiverPhone" column="receiver_phone"></result>
+        <result property="normalOrderOvertime" column="normal_order_overtime"></result>
+        <result property="createTime" column="create_time"></result>
+        <result property="orderStatus" column="status"></result>
+        <result property="totalAmount" column="total_amount"></result>
+        <result property="note" column="note"></result>
+        <result property="consignorPhone" column="consignor_phone"/>
+        <result property="paymentTime" column="payment_time"/>
+        <result property="orderRate" column="order_rate"/>
+    </resultMap>
+
+    <resultMap id="orderQueryMap" type="com.tulingxueyuan.mallfront.dto.OrderQueryDTO">
+        <id property="orderId" column="id"/>
+        <result property="orderSn" column="order_sn"/>
+        <result property="orderStatus" column="status"/>
+        <result property="payerName" column="receiver_name"/>
+        <result property="createdTime" column="create_time"/>
+        <result property="node" column="note"/>
+        <result property="payAmount" column="pay_amount"/>
+        <result property="productId" column="product_id"/>
+    </resultMap>
+
+    <select id="getUserOrders" resultMap="orderQueryMap">
+        select
+        oo.*
+        from oms_order oo
+        where oo.member_id=#{memberId}
+        and oo.order_type=#{orderQueryDTO.orderType} and oo.order_sn like '${orderQueryDTO.orderSn}%'
+        <if test="productIds !=null">
+            and oo.product_id in
+            <foreach collection="productIds" index="index" item="item" open="(" separator="," close=")">
+                #{item}
+            </foreach>
+        </if>
+        <choose>
+            <when test="orderQueryDTO.orderStatus!=null">
+                and oo.status=#{orderQueryDTO.orderStatus}
+            </when>
+        </choose>
+        <choose>
+            <when test="orderQueryDTO.amountSort==0">
+                order by oo.pay_Amount asc
+            </when>
+            <when test="orderQueryDTO.amountSort==1">
+                order by oo.pay_Amount desc
+            </when>
+        </choose>
+    </select>
+
+    <select id="getOrderDetail" resultMap="OrderDetailMap">
+        select
+            oo.*,oss.normal_order_overtime
+        from oms_order oo,(select * from oms_order_setting oos where 1=1 limit 0,1) as oss
+        where oo.id=#{orderId}
+    </select>
+
+</mapper>

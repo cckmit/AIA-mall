@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tulingxueyuan.mallfront.modules.oms.mapper.OmsCartItemMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.tulingxueyuan.mallfront.modules.oms.model.OmsCartItem">
+        <id column="id" property="id"/>
+        <result column="product_id" property="productId"/>
+        <result column="product_sku_id" property="productSkuId"/>
+        <result column="member_id" property="memberId"/>
+        <result column="quantity" property="quantity"/>
+        <result column="price" property="price"/>
+        <result column="spu1" property="spu1"/>
+        <result column="spu2" property="spu2"/>
+        <result column="spu3" property="spu3"/>
+        <result column="product_pic" property="productPic"/>
+        <result column="product_name" property="productName"/>
+        <result column="product_sub_title" property="productSubTitle"/>
+        <result column="product_sku_code" property="productSkuCode"/>
+        <result column="member_nickname" property="memberNickname"/>
+        <result column="create_date" property="createDate"/>
+        <result column="modify_date" property="modifyDate"/>
+        <result column="delete_status" property="deleteStatus"/>
+        <result column="product_category_id" property="productCategoryId"/>
+        <result column="product_brand" property="productBrand"/>
+        <result column="product_sn" property="productSn"/>
+        <result column="product_attr" property="productAttr"/>
+    </resultMap>
+
+    <resultMap id="cartListMap" type="com.tulingxueyuan.mallfront.dto.CartItemsDTO" extends="BaseResultMap">
+        <result property="stock" column="stock"></result>
+    </resultMap>
+
+
+    <select id="getCartList" resultMap="cartListMap">
+        select
+            oci.*,pss.stock-pss.lock_stock as stock
+            from oms_cart_item oci
+            left join pms_sku_stock pss on oci.product_sku_id=pss.id
+            where oci.member_id=#{id} and oci.delete_status=0 and pss.stock is not null
+        order by oci.price asc
+    </select>
+
+    <select id="getCartProductDTOByIds" resultMap="cartListMap">
+        SELECT
+        *,(SELECT stock-lock_stock FROM pms_sku_stock s WHERE  s.id=c.product_sku_id) as stock
+        FROM oms_cart_item c
+        ${ew.customSqlSegment}
+    </select>
+
+</mapper>
