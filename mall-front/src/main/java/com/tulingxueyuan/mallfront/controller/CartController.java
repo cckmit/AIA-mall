@@ -55,6 +55,7 @@ public class CartController {
     }
     //
 
+
     @PostMapping("/update/starStatus")
     public CommonResult starProduct(@RequestBody CartIdsDTO cartIdsDTO) {
         boolean starProduct = cartItemService.starCartProduct(cartIdsDTO);
