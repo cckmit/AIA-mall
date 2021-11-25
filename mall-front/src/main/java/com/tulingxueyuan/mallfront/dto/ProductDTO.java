@@ -19,9 +19,5 @@ public class ProductDTO {
     private String pic;
     @ApiModelProperty(value = "商品价")
     private BigDecimal price;
-    @ApiModelProperty(value = "市场价")
-    private BigDecimal originalPrice;
-    @ApiModelProperty(value = "控制价格是否要加上 xx元起 ，如果=1就不需要加，如果=0否则需要")
-    private Integer sub;
 
 }

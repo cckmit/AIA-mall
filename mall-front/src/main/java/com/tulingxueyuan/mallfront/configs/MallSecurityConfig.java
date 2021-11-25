@@ -18,7 +18,7 @@ public class MallSecurityConfig extends SecurityConfig {
     private UmsMemberService memberService;
 
     /**
-     * 认证交给springsecurity
+     * 认证交给springSecurity
      * @return UserDetailsService
      */
     @Bean

@@ -2,6 +2,7 @@ package com.tulingxueyuan.mallfront.modules.ums.mapper;
 
 import com.tulingxueyuan.mallfront.modules.ums.model.UmsMember;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import org.apache.ibatis.annotations.Param;
 
 /**
  * <p>
@@ -13,4 +14,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  */
 public interface UmsMemberMapper extends BaseMapper<UmsMember> {
 
+    boolean starCartProduct(@Param("id") Long id,@Param("memberId") Long memberId);
+
+    boolean unstarCartProduct(@Param("id") Long id, @Param("memberId") Long memberId);
 }

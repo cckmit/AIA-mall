@@ -1,10 +1,13 @@
 package com.tulingxueyuan.mallfront.controller;
 
 import com.tulingxueyuan.mall.common.api.CommonResult;
+import com.tulingxueyuan.mallfront.dto.CartIdsDTO;
 import com.tulingxueyuan.mallfront.dto.CartItemsDTO;
-import com.tulingxueyuan.mallfront.dto.CartDTO;
+import com.tulingxueyuan.mallfront.modules.oms.service.OmsCartItemService;
+import io.swagger.models.auth.In;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.annotation.ReadOnlyProperty;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,27 +20,25 @@ import java.util.List;
  */
 @Slf4j
 @RestController
-@RequestMapping("/car")
+@RequestMapping("/cart")
 public class CartController {
-/*
     @Autowired
     OmsCartItemService cartItemService;
 
-    @PostMapping("/add")
-    public CommonResult addProductToCar(@RequestBody CartDTO cartDTO) {
-        boolean addProductToCar = cartItemService.addProductToCar(cartDTO);
-        if (addProductToCar) {
-            return CommonResult.success(addProductToCar);
+    @PostMapping("/update/ProductQuantity")
+    public CommonResult addProductToCar(@RequestParam("cartItemId") Long cartItemId,
+                                        @RequestParam("productSkuId") Long productSkuId,
+                                        @RequestParam("quantity") Integer quantity) {
+        boolean updateProductQuantity = cartItemService.updateProductQuantity(cartItemId, productSkuId, quantity);
+        if (updateProductQuantity) {
+            return CommonResult.success(updateProductQuantity);
         } else {
             return CommonResult.failed();
         }
     }
 
-    @GetMapping("/products/sum")
-    public CommonResult getCartProductCount() {
-        Integer cartProductCount = cartItemService.getCartProductCount();
-        return CommonResult.success(cartProductCount);
-    }
+/*
+*/
 
     @GetMapping("/list")
     public CommonResult getCartList() {
@@ -45,20 +46,25 @@ public class CartController {
         return CommonResult.success(cartProductList);
     }
 
-    @PostMapping("/update/quantity")
-    public CommonResult updateQuantity(@RequestParam("id") Long cartItemId,
-                                       @RequestParam("quantity") Integer quantity) {
-        boolean updateQuantity=cartItemService.updateQuantity(cartItemId,quantity);
-        return CommonResult.success(updateQuantity);
-    }
-
     @PostMapping("/delete")
-    public CommonResult deleteCartItem(@RequestParam("ids") Long cartItemId) {
-        boolean deleteCartItem = cartItemService.deleteCartItem(cartItemId);
-        return CommonResult.success(deleteCartItem);
+    public CommonResult deleteCartItem(@RequestBody CartIdsDTO cartIdsDTO) {
+        boolean deleteCartItem = cartItemService.deleteCartItem(cartIdsDTO.getIds());
+        if (deleteCartItem) {
+            return CommonResult.success(deleteCartItem);
+        } else {
+            return CommonResult.failed();
+        }
     }
-*/
 
+    @PostMapping("/update/starStatus")
+    public CommonResult starProduct(@RequestBody CartIdsDTO cartIdsDTO) {
+        boolean starProduct = cartItemService.starCartProduct(cartIdsDTO);
+        if (starProduct) {
+            return CommonResult.success(starProduct);
+        } else {
+            return CommonResult.failed();
+        }
+    }
 
 
 }

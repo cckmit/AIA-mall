@@ -26,7 +26,6 @@
             <result property="name" column="pro_name"></result>
             <result property="pic" column="pro_pic"></result>
             <result property="price" column="pro_price"></result>
-            <result property="originalPrice" column="pro_originalPrice"></result>
         </collection>
     </resultMap>
 
@@ -40,7 +39,7 @@
             p.price pro_price,
             FROM pms_product_category pc1
             LEFT JOIN pms_product p
-            ON product_category_id IN (SELECT pc2.id FROM pms_product_category pc2 WHERE pc1.id =pc2.parent_id AND pc1.parent_id=0)
+            ON p.product_category_id IN (SELECT pc2.id FROM pms_product_category pc2 WHERE pc1.id =pc2.parent_id AND pc1.parent_id=0)
             WHERE pc1.parent_id=0 and pc1.nav_status=1
             order by pc1.id asc,p.sort desc;
     </select>

@@ -28,7 +28,7 @@ import java.util.Map;
 
 
 /***
- * @Author peipei9
+ * @Author peipei
  */
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 

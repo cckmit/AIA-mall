@@ -23,13 +23,12 @@ import java.io.IOException;
 import java.util.List;
 
 /***
- * @Author 徐庶   QQ:1092002729
- * @Slogan 致敬大师，致敬未来的你
+ * @Author peipei
+ * @Date 2021/10/21
  *
  * OncePerRequestFilter: 能够保证过滤只执行一次
  */
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
-
 
 
     @Autowired
@@ -57,15 +56,15 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             String userName = jwtTokenUtil.getUserNameFromToken(jwt);
 
             if(!StrUtil.isBlank(userName)){
-
                 // 从服务器中查询
                 UserDetails userDetails = userDetailsService.loadUserByUsername(userName);
                 if(userDetails!=null){
                     // 生成springsecurity的通过认证标识
                     UsernamePasswordAuthenticationToken authenticationToken=new UsernamePasswordAuthenticationToken(userDetails,null,userDetails.getAuthorities());
                     authenticationToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
-
                     SecurityContextHolder.getContext().setAuthentication(authenticationToken);
+                    //当jwt认证成功后刷新jwt
+                    jwtTokenUtil.refreshHeadToken(jwt);
                 }
             }
         }

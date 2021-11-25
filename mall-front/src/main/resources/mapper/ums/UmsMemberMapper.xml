@@ -17,5 +17,18 @@
         <result column="job" property="job" />
         <result column="personalized_signature" property="personalizedSignature" />
     </resultMap>
+    <update id="starCartProduct">
+        UPDATE
+        ums_member_star ums
+        SET ums.star_product_id = CONCAT(ums.star_product_id,',${id}')
+        where ums.member_id=#{memberId}
+    </update>
+
+    <update id="unstarCartProduct">
+        UPDATE
+        ums_member_star ums
+        SET ums.star_product_id = repalce(ums.star_product_id,',${id}','')
+        where ums.member_id=#{memberId}
+    </update>
 
 </mapper>

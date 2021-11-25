@@ -2,6 +2,7 @@ package com.tulingxueyuan.mallfront.modules.sms.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.tulingxueyuan.mallfront.dto.HomeRecommendDTO;
+import com.tulingxueyuan.mallfront.dto.NavHeaderCartDTO;
 import com.tulingxueyuan.mallfront.modules.sms.model.SmsHomeAdvertise;
 
 import java.util.List;
@@ -19,6 +20,11 @@ public interface SmsHomeAdvertiseService extends IService<SmsHomeAdvertise> {
     List<SmsHomeAdvertise> getAdverties();
 
     List<HomeRecommendDTO> getGoodSale();
+
+
+    List<NavHeaderCartDTO> getCartProductList();
+
+    boolean removeCartProduct(Long productId);
 
 
 }

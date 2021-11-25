@@ -4,15 +4,14 @@ import com.tulingxueyuan.mall.common.api.CommonResult;
 import com.tulingxueyuan.mallfront.dto.HomeMenusBannerDTO;
 import com.tulingxueyuan.mallfront.dto.HomeMenusDTO;
 import com.tulingxueyuan.mallfront.dto.HomeRecommendDTO;
+import com.tulingxueyuan.mallfront.dto.NavHeaderCartDTO;
 import com.tulingxueyuan.mallfront.modules.pms.model.PmsProductCategory;
 import com.tulingxueyuan.mallfront.modules.pms.service.PmsProductCategoryService;
 import com.tulingxueyuan.mallfront.modules.sms.model.SmsHomeAdvertise;
 import com.tulingxueyuan.mallfront.modules.sms.service.SmsHomeAdvertiseService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 
 import java.util.List;
@@ -54,5 +53,25 @@ public class HomeController {
     public CommonResult getGoodSale() {
         List<HomeRecommendDTO> goodSale = homeAdvertiseService.getGoodSale();
         return CommonResult.success(goodSale);
+    }
+
+    @GetMapping("/cartProductList")
+    public CommonResult getCartProductList() {
+        List<NavHeaderCartDTO> navHeaderCartDTOList = homeAdvertiseService.getCartProductList();
+        if (navHeaderCartDTOList != null) {
+            return CommonResult.success(navHeaderCartDTOList);
+        } else {
+            return CommonResult.failed();
+        }
+    }
+
+    @PostMapping("/removeCartProduct")
+    public CommonResult removeCartProduct(@RequestParam("productId") Long productId){
+        boolean removeCartProduct=homeAdvertiseService.removeCartProduct(productId);
+        if (removeCartProduct) {
+            return CommonResult.success(removeCartProduct);
+        } else {
+            return CommonResult.failed();
+        }
     }
 }

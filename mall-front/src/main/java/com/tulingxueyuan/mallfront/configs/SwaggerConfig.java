@@ -18,9 +18,9 @@ public class SwaggerConfig extends BaseSwaggerConfig {
     @Override
     public SwaggerProperties swaggerProperties() {
         return SwaggerProperties.builder()
-                .apiBasePackage("com.tulingxueyuan.mall.modules")
-                .title("mall-tiny基础版项目前台")
-                .description("tuling_mall项目前台接口文档")
+                .apiBasePackage("com.AIA.mall.modules")
+                .title("AIA-mall客户端")
+                .description("AIA-mall项目前台接口文档")
                 .contactName("peipei")
                 .version("1.0")
                 .enableSecurity(false)

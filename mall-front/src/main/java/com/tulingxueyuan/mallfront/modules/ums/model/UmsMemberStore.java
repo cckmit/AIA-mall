@@ -40,8 +40,8 @@ public class UmsMemberStore implements Serializable {
     private String description;
 
     @ApiModelProperty(value = "开店时间")
-    @TableField("store_openTime")
-    private Integer storeOpentime;
+    @TableField("store_open_time")
+    private Integer storeOpenTime;
 
 
 }

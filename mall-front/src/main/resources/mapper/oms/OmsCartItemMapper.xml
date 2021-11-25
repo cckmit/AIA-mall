@@ -25,6 +25,7 @@
         <result column="product_brand" property="productBrand"/>
         <result column="product_sn" property="productSn"/>
         <result column="product_attr" property="productAttr"/>
+        <result column="star_status" property="starStatus"/>
     </resultMap>
 
     <resultMap id="cartListMap" type="com.tulingxueyuan.mallfront.dto.CartItemsDTO" extends="BaseResultMap">
@@ -37,7 +38,7 @@
             oci.*,pss.stock-pss.lock_stock as stock
             from oms_cart_item oci
             left join pms_sku_stock pss on oci.product_sku_id=pss.id
-            where oci.member_id=#{id} and oci.delete_status=0 and pss.stock is not null
+            where oci.member_id=#{memberId} and oci.delete_status=0 and pss.stock is not null
         order by oci.price asc
     </select>
 

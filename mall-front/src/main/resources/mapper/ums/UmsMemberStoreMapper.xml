@@ -8,7 +8,7 @@
         <result column="member_id" property="memberId" />
         <result column="store_name" property="storeName" />
         <result column="description" property="description" />
-        <result column="store_openTime" property="storeOpentime" />
+        <result column="store_open_time" property="storeOpenTime" />
     </resultMap>
 
 </mapper>

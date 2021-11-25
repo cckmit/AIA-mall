@@ -53,7 +53,6 @@ public class JwtTokenUtil {
      */
     private Claims getClaimsFromToken(String token) {
         Claims claims = null;
-        System.out.println(token);
         try {
             claims = Jwts.parser()
                     .setSigningKey(secret)

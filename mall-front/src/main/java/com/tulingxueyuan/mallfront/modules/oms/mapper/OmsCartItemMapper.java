@@ -20,7 +20,7 @@ import java.util.List;
 public interface OmsCartItemMapper extends BaseMapper<OmsCartItem> {
 
 
-    List<CartItemsDTO> getCartList(Long id);
+    List<CartItemsDTO> getCartList(Long memberId);
 
     List<CartItemsDTO> getCartProductDTOByIds(@Param(Constants.WRAPPER) Wrapper ew);
 

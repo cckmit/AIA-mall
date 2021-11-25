@@ -23,6 +23,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.tulingxueyuan.mallfront.modules.ums.service.UmsMemberStarService;
 import com.tulingxueyuan.mallfront.modules.ums.service.UmsMemberStoreService;
 import io.swagger.annotations.Api;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -39,6 +40,7 @@ import org.springframework.stereotype.Service;
  * @author peipei
  * @since 2021-10-17
  */
+@Slf4j
 @Service
 public class UmsMemberServiceImpl extends ServiceImpl<UmsMemberMapper, UmsMember> implements UmsMemberService {
     @Autowired
@@ -122,7 +124,7 @@ public class UmsMemberServiceImpl extends ServiceImpl<UmsMemberMapper, UmsMember
         UmsMember umsAdmin=null;
         try {
             UserDetails userDetails =  loadMemberByName(userName);
-            umsAdmin=((MemberDetails)userDetails).getUmsMember();
+            umsAdmin = ((MemberDetails)userDetails).getUmsMember();
             if(!bCryptPasswordEncoder.matches(passWord,umsAdmin.getPassword())){
                 System.out.println("密码不正确");
                 Asserts.fail("密码不正确");

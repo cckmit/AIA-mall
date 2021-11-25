@@ -85,5 +85,8 @@ public class OmsCartItem implements Serializable {
     @ApiModelProperty(value = "商品销售属性")
     private String productAttr;
 
+    @ApiModelProperty(value = "收藏状态")
+    private Integer starStatus;
+
 
 }
