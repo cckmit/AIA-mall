@@ -37,8 +37,6 @@ public class CartController {
         }
     }
 
-/*
-*/
 
     @GetMapping("/list")
     public CommonResult getCartList() {
